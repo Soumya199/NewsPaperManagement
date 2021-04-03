@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - News Paper Management</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+            *:before,
+            *:after {
+                box-sizing: border-box;
+            }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .navbar navbar-inverse navbar-fixed-top {
+            color: white;
+        }
+
+        .main-container {
+            min-height: 100vh;
+            overflow: hidden;
+            display: block;
+            position: relative;
+            padding-bottom: 100px;
+            color: white;
+        }
+
+        img {
+            opacity: 0.5;
+        }
+
+        #actionlinks {
+            color: white;
+        }
+
+            #actionlinks:hover {
+                background-color: green;
+            }
+
+        footer {
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            color: white;
+            text-align: center;
+            height: 120px;
+        }
+
+        .fa {
+            padding: 7px;
+            font-size: 30px;
+            width: 27px;
+            text-align: center;
+            text-decoration: none;
+            margin: 5px 2px;
+            border-radius: 50%;
+        }
+
+            .fa:hover {
+                opacity: 0.7;
+            }
+
+        .fa-facebook {
+            background: #3B5998;
+            color: white;
+        }
+
+        .fa-twitter {
+            background: #55ACEE;
+            color: white;
+        }
+
+        .fa-google {
+            background: #dd4b39;
+            color: white;
+        }
+
+        .fa-youtube {
+            background: #bb0000;
+            color: white;
+        }
+
+        .fa-instagram {
+            background: #125688;
+            color: white;
+        }
+
+        .ft-quick-links a {
+            padding: 5px;
+            font-size: 13px;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+        }
+
+            .ft-quick-links a:hover {
+                background: #171717;
+            }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="~/Image/SiteResource/Favicoin.jfif" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top" style="background-color:rgb(60,60,60)">
+        <div class="container">
+            <div class="nav-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("NewsPaperManagement", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="nav navbar-collapse collapsa">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Admin Login", "AdminLogin", "Admin")</li>
+
+                    <li>@Html.ActionLink("Customer Login", "CustomerLogin", "Customer")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <div id="footer">
+        <hr />
+        <footer>
+            :
+            <div class="footer" style="background-color:rgb( 60,60,60 ) ;bottom:0;position:fixed; width:100%;height:7em">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <p>
+                            <br />
+                            <a href="https://www.facebook.com/" target="_blank" class="fa fa-facebook"></a>
+                            <a href="https://twitter.com/" target="_blank" class="fa fa-twitter"></a>
+                            <a href="https://www.google.com/" target="_blank" class="fa fa-google"></a>
+                            <a href="https://www.youtube.com/" target="_blank" class="fa fa-youtube"></a>
+                            <a href="https://www.instagram.com/" target="_blank" class="fa fa-instagram"></a>
+                        </p>
+                    </div>
+
+                    <div class="ft-quick-links">
+                        <ul style="display:inline-block;list-style-type:none;">
+                            <li style="float:left;">
+                                @Html.ActionLink("Privacy Policy", "PrivacyPolicy", "Home") |
+                            </li>
+                            <li style="float:left;">
+                                @Html.ActionLink("Contact", "Contact", "Home") |
+                            </li>
+                            <li style="float:left;">
+                                @Html.ActionLink("About", "About", "Home") |
+                            </li>
+                            <li style="float:left;">
+                                @Html.ActionLink("Terms and Conditions", "TermsandConditions", "Home")
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<NewsPaperAdvertisementManagement.Models.Customer>
+
+@{
+    ViewBag.Title = "ViewCustomer";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>ViewCustomer</h2>
+<p>
+    @using (Html.BeginForm("ViewCustomer", "AdminDashboard", FormMethod.Get))
+    {
+    
+        <b>Search By</b>@Html.RadioButton("searchString", "Name",true)<text>Customer Name</text>
+        @Html.RadioButton("searchString", "Email")<text>Customer Email</text><br />
+        <div>
+            @Html.TextBox("search")
+            <button class="btn btn-navbar" type="submit" value="search">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+     }
+
+</p>
+<div class="card-body p-0">
+    <table class="table table-striped projects">
+        <thead>
+            <tr>
+                <th>
+                    Customer Email
+                </th>
+                <th>
+                    Customer Name
+                </th>
+                <th>
+                    Customer Phone
+                </th>
+                <th>
+                    Customer Address
+                </th>
+            </tr>
+        </thead>
+        @if (Model.Count() != 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.CustomerEmailId
+                    </td>
+                    <td>
+                        @item.CustomerName
+                    </td>
+                    <td>
+                        @item.CustomerPhone
+
+                    </td>
+                    <td>
+                        @item.CustomerAddress
+
+                    </td>
+                    <td>
+                    </td>
+                    <td class="project-actions text-right">
+                        <a class="btn btn-info btn-sm" href="@Url.Action("EditCustomer",new {id=item.CustomerEmailId +"/"})">
+                            <i class="fas fa-pencil-alt">
+                            </i>
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="6"><h2 style="color:red">No customer Found In this detail</h2></td>
+            </tr>
+        }
+
+    </table>
+</div>

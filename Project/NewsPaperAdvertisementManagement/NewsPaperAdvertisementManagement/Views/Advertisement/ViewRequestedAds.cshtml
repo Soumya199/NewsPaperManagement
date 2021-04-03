@@ -1,0 +1,83 @@
+﻿@model List<NewsPaperAdvertisementManagement.Models.Advertisement>
+
+@{
+    ViewBag.Title = "ViewRequestedAds";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="card-body p-0">
+    <table class="table table-striped projects">
+        <thead>
+            <tr>
+                <th>
+                    Customer Email
+                </th>
+                <th>
+                    Advertisement Name
+                </th>
+                <th>
+                    Advertisement Price
+                </th>
+                <th>
+                    Advertisement Date
+                </th>
+                <th>
+                    Advertisement Status
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {  
+    <tr>
+        <td>
+            @item.CustomerEmailId
+        </td>
+        <td>
+            @item.AdvertisementName
+        </td>
+        <td>
+            @item.AdvertisementPrice
+
+        </td>
+        <td>
+            @item.AdvertisementDate
+
+        </td>
+        <td class="project-state">
+            @{ if (item.AdvertisementStatus.Equals("Pending"))
+                {
+                    <span class="badge badge-danger">
+                        @item.AdvertisementStatus
+                    </span>
+                }
+                else
+                {
+                    <span class="badge badge-success">
+                        @item.AdvertisementStatus
+                    </span>
+                }
+            }
+
+        </td>
+        <td class="project-actions text-right">
+            <a class="btn btn-primary btn-sm" href="@Url.Action("ConfirmRequestedAds",new {id=item.AdvertisementNo })">
+                <i class="fas fa-align-right">
+                </i>
+                Confirm
+            </a>
+            <a class="btn btn-info btn-sm" href="@Url.Action("EditRequestedAds",new {id=item.AdvertisementNo })">
+                <i class="fas fa-pencil-alt">
+                </i>
+                Edit
+            </a>
+            <a class="btn btn-danger btn-sm" href="@Url.Action("DeleteRequestedAds",new {id=item.AdvertisementNo })">
+                <i class="fas fa-trash">
+                </i>
+                Delete
+            </a>
+        </td>
+    </tr>             
+         }
+                       
+   </table>
+</div>

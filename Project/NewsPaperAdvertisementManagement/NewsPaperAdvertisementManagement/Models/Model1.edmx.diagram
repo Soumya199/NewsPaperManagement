@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2b466bc6e1da48468529d2a6ada0de77" Name="Diagram1">
+        <EntityTypeShape EntityType="NewsPaperAgencyModel.Admin" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsPaperAgencyModel.Advertisement" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsPaperAgencyModel.Customer" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewsPaperAgencyModel.ReportProblem" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="NewsPaperAgencyModel.FK__Advertise__Custo__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="NewsPaperAgencyModel.FK__ReportPro__Adver__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="NewsPaperAgencyModel.FK__ReportPro__Custo__2D27B809" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

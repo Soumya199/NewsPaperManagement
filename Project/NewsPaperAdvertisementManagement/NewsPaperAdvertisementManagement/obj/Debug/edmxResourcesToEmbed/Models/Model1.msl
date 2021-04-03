@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NewsPaperAgencyModelStoreContainer" CdmEntityContainer="NewsPaperAgencyEntities">
+    <EntitySetMapping Name="Admins">
+      <EntityTypeMapping TypeName="NewsPaperAgencyModel.Admin">
+        <MappingFragment StoreEntitySet="Admin">
+          <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+          <ScalarProperty Name="AdminEmailId" ColumnName="AdminEmailId" />
+          <ScalarProperty Name="AdminPhone" ColumnName="AdminPhone" />
+          <ScalarProperty Name="AdminPassword" ColumnName="AdminPassword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Advertisements">
+      <EntityTypeMapping TypeName="NewsPaperAgencyModel.Advertisement">
+        <MappingFragment StoreEntitySet="Advertisement">
+          <ScalarProperty Name="AdvertisementNo" ColumnName="AdvertisementNo" />
+          <ScalarProperty Name="AdvertisementName" ColumnName="AdvertisementName" />
+          <ScalarProperty Name="CustomerEmailId" ColumnName="CustomerEmailId" />
+          <ScalarProperty Name="AdvertisementDescription" ColumnName="AdvertisementDescription" />
+          <ScalarProperty Name="AdvertisementImage" ColumnName="AdvertisementImage" />
+          <ScalarProperty Name="AdvertisementDimension" ColumnName="AdvertisementDimension" />
+          <ScalarProperty Name="AdvertisementPrice" ColumnName="AdvertisementPrice" />
+          <ScalarProperty Name="AdvertisementDate" ColumnName="AdvertisementDate" />
+          <ScalarProperty Name="AdvertisementStatus" ColumnName="AdvertisementStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="NewsPaperAgencyModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="CustomerEmailId" ColumnName="CustomerEmailId" />
+          <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
+          <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+          <ScalarProperty Name="CustomerPssword" ColumnName="CustomerPssword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReportProblems">
+      <EntityTypeMapping TypeName="NewsPaperAgencyModel.ReportProblem">
+        <MappingFragment StoreEntitySet="ReportProblem">
+          <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+          <ScalarProperty Name="AdvertisementNo" ColumnName="AdvertisementNo" />
+          <ScalarProperty Name="CustomerEmailId" ColumnName="CustomerEmailId" />
+          <ScalarProperty Name="ReportType" ColumnName="ReportType" />
+          <ScalarProperty Name="ReportDescription" ColumnName="ReportDescription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

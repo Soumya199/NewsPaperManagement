@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NewsPaperAgencyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminEmailId" />
+    </Key>
+    <Property Name="AdminName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="AdminEmailId" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="AdminPhone" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="AdminPassword" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Advertisement">
+    <Key>
+      <PropertyRef Name="AdvertisementNo" />
+    </Key>
+    <Property Name="AdvertisementNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdvertisementName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CustomerEmailId" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="AdvertisementDescription" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="AdvertisementImage" Type="varchar(max)" Nullable="false" />
+    <Property Name="AdvertisementDimension" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="AdvertisementPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="AdvertisementDate" Type="date" Nullable="false" />
+    <Property Name="AdvertisementStatus" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerEmailId" />
+    </Key>
+    <Property Name="CustomerName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CustomerEmailId" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CustomerPhone" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="CustomerAddress" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="CustomerPssword" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ReportProblem">
+    <Key>
+      <PropertyRef Name="ReportId" />
+    </Key>
+    <Property Name="ReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdvertisementNo" Type="int" Nullable="false" />
+    <Property Name="CustomerEmailId" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ReportType" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ReportDescription" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__Advertise__Custo__286302EC">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Advertisement" Type="Self.Advertisement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerEmailId" />
+      </Principal>
+      <Dependent Role="Advertisement">
+        <PropertyRef Name="CustomerEmailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ReportPro__Adver__2C3393D0">
+    <End Role="Advertisement" Type="Self.Advertisement" Multiplicity="1" />
+    <End Role="ReportProblem" Type="Self.ReportProblem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Advertisement">
+        <PropertyRef Name="AdvertisementNo" />
+      </Principal>
+      <Dependent Role="ReportProblem">
+        <PropertyRef Name="AdvertisementNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ReportPro__Custo__2D27B809">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="ReportProblem" Type="Self.ReportProblem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerEmailId" />
+      </Principal>
+      <Dependent Role="ReportProblem">
+        <PropertyRef Name="CustomerEmailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NewsPaperAgencyModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Advertisement" EntityType="Self.Advertisement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReportProblem" EntityType="Self.ReportProblem" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Advertise__Custo__286302EC" Association="Self.FK__Advertise__Custo__286302EC">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Advertisement" EntitySet="Advertisement" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ReportPro__Adver__2C3393D0" Association="Self.FK__ReportPro__Adver__2C3393D0">
+      <End Role="Advertisement" EntitySet="Advertisement" />
+      <End Role="ReportProblem" EntitySet="ReportProblem" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ReportPro__Custo__2D27B809" Association="Self.FK__ReportPro__Custo__2D27B809">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="ReportProblem" EntitySet="ReportProblem" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

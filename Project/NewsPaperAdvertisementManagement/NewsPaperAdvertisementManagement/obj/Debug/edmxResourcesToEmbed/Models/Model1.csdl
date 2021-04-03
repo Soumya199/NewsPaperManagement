@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NewsPaperAgencyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminEmailId" />
+    </Key>
+    <Property Name="AdminName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AdminEmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AdminPhone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AdminPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Advertisement">
+    <Key>
+      <PropertyRef Name="AdvertisementNo" />
+    </Key>
+    <Property Name="AdvertisementNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdvertisementName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustomerEmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AdvertisementDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AdvertisementImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AdvertisementDimension" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AdvertisementPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="AdvertisementDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="AdvertisementStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__Advertise__Custo__286302EC" FromRole="Advertisement" ToRole="Customer" />
+    <NavigationProperty Name="ReportProblems" Relationship="Self.FK__ReportPro__Adver__2C3393D0" FromRole="Advertisement" ToRole="ReportProblem" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerEmailId" />
+    </Key>
+    <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustomerEmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustomerPhone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustomerAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CustomerPssword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Advertisements" Relationship="Self.FK__Advertise__Custo__286302EC" FromRole="Customer" ToRole="Advertisement" />
+    <NavigationProperty Name="ReportProblems" Relationship="Self.FK__ReportPro__Custo__2D27B809" FromRole="Customer" ToRole="ReportProblem" />
+  </EntityType>
+  <EntityType Name="ReportProblem">
+    <Key>
+      <PropertyRef Name="ReportId" />
+    </Key>
+    <Property Name="ReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdvertisementNo" Type="Int32" Nullable="false" />
+    <Property Name="CustomerEmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReportType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReportDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Advertisement" Relationship="Self.FK__ReportPro__Adver__2C3393D0" FromRole="ReportProblem" ToRole="Advertisement" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK__ReportPro__Custo__2D27B809" FromRole="ReportProblem" ToRole="Customer" />
+  </EntityType>
+  <Association Name="FK__Advertise__Custo__286302EC">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="Advertisement" Type="Self.Advertisement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerEmailId" />
+      </Principal>
+      <Dependent Role="Advertisement">
+        <PropertyRef Name="CustomerEmailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ReportPro__Adver__2C3393D0">
+    <End Role="Advertisement" Type="Self.Advertisement" Multiplicity="1" />
+    <End Role="ReportProblem" Type="Self.ReportProblem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Advertisement">
+        <PropertyRef Name="AdvertisementNo" />
+      </Principal>
+      <Dependent Role="ReportProblem">
+        <PropertyRef Name="AdvertisementNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ReportPro__Custo__2D27B809">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+    <End Role="ReportProblem" Type="Self.ReportProblem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerEmailId" />
+      </Principal>
+      <Dependent Role="ReportProblem">
+        <PropertyRef Name="CustomerEmailId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NewsPaperAgencyEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="Advertisements" EntityType="Self.Advertisement" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="ReportProblems" EntityType="Self.ReportProblem" />
+    <AssociationSet Name="FK__Advertise__Custo__286302EC" Association="Self.FK__Advertise__Custo__286302EC">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Advertisement" EntitySet="Advertisements" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ReportPro__Adver__2C3393D0" Association="Self.FK__ReportPro__Adver__2C3393D0">
+      <End Role="Advertisement" EntitySet="Advertisements" />
+      <End Role="ReportProblem" EntitySet="ReportProblems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ReportPro__Custo__2D27B809" Association="Self.FK__ReportPro__Custo__2D27B809">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="ReportProblem" EntitySet="ReportProblems" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

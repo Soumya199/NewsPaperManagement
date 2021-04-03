@@ -1,0 +1,94 @@
+﻿@model IEnumerable<NewsPaperAdvertisementManagement.Models.Advertisement>
+
+@{
+    ViewBag.Title = "ViewRequestStatus";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<h2>View Request Status</h2>
+<br />
+<div class="card-body p-0">
+    <table class="table table-striped projects">
+        <thead>
+            <tr>
+                <th>
+                    Advertisement No
+                </th>
+                <th>
+                    Advertisement Name
+                </th>
+                <th>
+                    Advertisement Price
+                </th>
+                <th>
+                    Advertisement Date
+                </th>
+                <th>
+                    Advertisement Status
+                </th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @item.AdvertisementNo
+        </td>
+        <td>
+            @item.AdvertisementName
+        </td>
+        <td>
+            @item.AdvertisementPrice
+
+        </td>
+        <td>
+            @item.AdvertisementDate
+
+        </td>
+        <td class="project-state">
+            @{ if (item.AdvertisementStatus.Equals("Pending"))
+                {
+                    <span class="badge badge-danger">
+                        @item.AdvertisementStatus
+                    </span>
+                }
+                else
+                {
+                    <span class="badge badge-success">
+                        @item.AdvertisementStatus
+                    </span>
+                }
+            }
+
+        </td>
+        <td class="project-actions text-right">
+            @{ if (item.AdvertisementStatus.Equals("Pending"))
+                {
+                    <a class="btn btn-danger btn-sm" href="@Url.Action("CancelRequestedAds",new {id=item.AdvertisementNo })">
+                        <i class="fas fa-trash">
+                        </i>
+                        Cancel
+                    </a>
+                }
+                else
+                {
+                    <a class="btn btn-primary btn-sm" href="@Url.Action("ViewConfirmAds",new {id=item.AdvertisementNo }))">
+                        <i class="fas fa-camera">
+                        </i>
+                        View
+                    </a>
+                    <a class="btn btn-danger btn-sm" href="@Url.Action("CancelRequestedAds",new {id=item.AdvertisementNo })">
+                        <i class="fas fa-trash">
+                        </i>
+                        Cancel
+                    </a>
+                }
+            }
+
+        </td>
+    </tr>
+
+        }
+
+    </table>
+</div>

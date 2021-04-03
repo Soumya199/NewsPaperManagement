@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NewsPaperAgencyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminEmailId" />
+          </Key>
+          <Property Name="AdminName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AdminEmailId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AdminPhone" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AdminPassword" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Advertisement">
+          <Key>
+            <PropertyRef Name="AdvertisementNo" />
+          </Key>
+          <Property Name="AdvertisementNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdvertisementName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CustomerEmailId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AdvertisementDescription" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AdvertisementImage" Type="varchar(max)" Nullable="false" />
+          <Property Name="AdvertisementDimension" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AdvertisementPrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="AdvertisementDate" Type="date" Nullable="false" />
+          <Property Name="AdvertisementStatus" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerEmailId" />
+          </Key>
+          <Property Name="CustomerName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CustomerEmailId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CustomerPhone" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CustomerAddress" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="CustomerPssword" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportProblem">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdvertisementNo" Type="int" Nullable="false" />
+          <Property Name="CustomerEmailId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ReportType" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ReportDescription" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Advertise__Custo__286302EC">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Advertisement" Type="Self.Advertisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerEmailId" />
+            </Principal>
+            <Dependent Role="Advertisement">
+              <PropertyRef Name="CustomerEmailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReportPro__Adver__2C3393D0">
+          <End Role="Advertisement" Type="Self.Advertisement" Multiplicity="1" />
+          <End Role="ReportProblem" Type="Self.ReportProblem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Advertisement">
+              <PropertyRef Name="AdvertisementNo" />
+            </Principal>
+            <Dependent Role="ReportProblem">
+              <PropertyRef Name="AdvertisementNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReportPro__Custo__2D27B809">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="ReportProblem" Type="Self.ReportProblem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerEmailId" />
+            </Principal>
+            <Dependent Role="ReportProblem">
+              <PropertyRef Name="CustomerEmailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NewsPaperAgencyModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Advertisement" EntityType="Self.Advertisement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReportProblem" EntityType="Self.ReportProblem" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Advertise__Custo__286302EC" Association="Self.FK__Advertise__Custo__286302EC">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Advertisement" EntitySet="Advertisement" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReportPro__Adver__2C3393D0" Association="Self.FK__ReportPro__Adver__2C3393D0">
+            <End Role="Advertisement" EntitySet="Advertisement" />
+            <End Role="ReportProblem" EntitySet="ReportProblem" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReportPro__Custo__2D27B809" Association="Self.FK__ReportPro__Custo__2D27B809">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="ReportProblem" EntitySet="ReportProblem" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NewsPaperAgencyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="AdminEmailId" />
+          </Key>
+          <Property Name="AdminName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdminEmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdminPhone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdminPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Advertisement">
+          <Key>
+            <PropertyRef Name="AdvertisementNo" />
+          </Key>
+          <Property Name="AdvertisementNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdvertisementName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerEmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdvertisementDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdvertisementImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdvertisementDimension" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AdvertisementPrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="AdvertisementDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AdvertisementStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__Advertise__Custo__286302EC" FromRole="Advertisement" ToRole="Customer" />
+          <NavigationProperty Name="ReportProblems" Relationship="Self.FK__ReportPro__Adver__2C3393D0" FromRole="Advertisement" ToRole="ReportProblem" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerEmailId" />
+          </Key>
+          <Property Name="CustomerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerEmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerPhone" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerPssword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Advertisements" Relationship="Self.FK__Advertise__Custo__286302EC" FromRole="Customer" ToRole="Advertisement" />
+          <NavigationProperty Name="ReportProblems" Relationship="Self.FK__ReportPro__Custo__2D27B809" FromRole="Customer" ToRole="ReportProblem" />
+        </EntityType>
+        <EntityType Name="ReportProblem">
+          <Key>
+            <PropertyRef Name="ReportId" />
+          </Key>
+          <Property Name="ReportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdvertisementNo" Type="Int32" Nullable="false" />
+          <Property Name="CustomerEmailId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReportType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ReportDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Advertisement" Relationship="Self.FK__ReportPro__Adver__2C3393D0" FromRole="ReportProblem" ToRole="Advertisement" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK__ReportPro__Custo__2D27B809" FromRole="ReportProblem" ToRole="Customer" />
+        </EntityType>
+        <Association Name="FK__Advertise__Custo__286302EC">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Advertisement" Type="Self.Advertisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerEmailId" />
+            </Principal>
+            <Dependent Role="Advertisement">
+              <PropertyRef Name="CustomerEmailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReportPro__Adver__2C3393D0">
+          <End Role="Advertisement" Type="Self.Advertisement" Multiplicity="1" />
+          <End Role="ReportProblem" Type="Self.ReportProblem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Advertisement">
+              <PropertyRef Name="AdvertisementNo" />
+            </Principal>
+            <Dependent Role="ReportProblem">
+              <PropertyRef Name="AdvertisementNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ReportPro__Custo__2D27B809">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="ReportProblem" Type="Self.ReportProblem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerEmailId" />
+            </Principal>
+            <Dependent Role="ReportProblem">
+              <PropertyRef Name="CustomerEmailId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NewsPaperAgencyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="Advertisements" EntityType="Self.Advertisement" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="ReportProblems" EntityType="Self.ReportProblem" />
+          <AssociationSet Name="FK__Advertise__Custo__286302EC" Association="Self.FK__Advertise__Custo__286302EC">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Advertisement" EntitySet="Advertisements" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReportPro__Adver__2C3393D0" Association="Self.FK__ReportPro__Adver__2C3393D0">
+            <End Role="Advertisement" EntitySet="Advertisements" />
+            <End Role="ReportProblem" EntitySet="ReportProblems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ReportPro__Custo__2D27B809" Association="Self.FK__ReportPro__Custo__2D27B809">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="ReportProblem" EntitySet="ReportProblems" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NewsPaperAgencyModelStoreContainer" CdmEntityContainer="NewsPaperAgencyEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="NewsPaperAgencyModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+                <ScalarProperty Name="AdminEmailId" ColumnName="AdminEmailId" />
+                <ScalarProperty Name="AdminPhone" ColumnName="AdminPhone" />
+                <ScalarProperty Name="AdminPassword" ColumnName="AdminPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Advertisements">
+            <EntityTypeMapping TypeName="NewsPaperAgencyModel.Advertisement">
+              <MappingFragment StoreEntitySet="Advertisement">
+                <ScalarProperty Name="AdvertisementNo" ColumnName="AdvertisementNo" />
+                <ScalarProperty Name="AdvertisementName" ColumnName="AdvertisementName" />
+                <ScalarProperty Name="CustomerEmailId" ColumnName="CustomerEmailId" />
+                <ScalarProperty Name="AdvertisementDescription" ColumnName="AdvertisementDescription" />
+                <ScalarProperty Name="AdvertisementImage" ColumnName="AdvertisementImage" />
+                <ScalarProperty Name="AdvertisementDimension" ColumnName="AdvertisementDimension" />
+                <ScalarProperty Name="AdvertisementPrice" ColumnName="AdvertisementPrice" />
+                <ScalarProperty Name="AdvertisementDate" ColumnName="AdvertisementDate" />
+                <ScalarProperty Name="AdvertisementStatus" ColumnName="AdvertisementStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="NewsPaperAgencyModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerEmailId" ColumnName="CustomerEmailId" />
+                <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
+                <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+                <ScalarProperty Name="CustomerPssword" ColumnName="CustomerPssword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportProblems">
+            <EntityTypeMapping TypeName="NewsPaperAgencyModel.ReportProblem">
+              <MappingFragment StoreEntitySet="ReportProblem">
+                <ScalarProperty Name="ReportId" ColumnName="ReportId" />
+                <ScalarProperty Name="AdvertisementNo" ColumnName="AdvertisementNo" />
+                <ScalarProperty Name="CustomerEmailId" ColumnName="CustomerEmailId" />
+                <ScalarProperty Name="ReportType" ColumnName="ReportType" />
+                <ScalarProperty Name="ReportDescription" ColumnName="ReportDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

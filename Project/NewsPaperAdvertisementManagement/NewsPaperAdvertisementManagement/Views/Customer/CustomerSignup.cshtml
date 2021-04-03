@@ -1,0 +1,87 @@
+﻿@model NewsPaperAdvertisementManagement.Models.Customer
+@{
+    ViewBag.Title = "Register";
+}
+
+<br />
+<body style="background-image:url(../Image/SiteResource/background.jpg);background-repeat:no-repeat;background-position:center;background-size:cover;overflow:hidden;">
+    <br />
+    <h2>Register User</h2>
+
+    <div class="container" style="background: rgba(255, 255, 255, 0.8)">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        
+
+
+
+        <div class="form-horizontal" style="font-size:16px;">
+            @if (ViewBag.error != null)
+            {
+                <span class="badge badge-danger">@ViewBag.error</span>
+            }
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.CustomerName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.CustomerName, "", new { @class = "form-control", @placeholder = "First Name" })
+                    @Html.ValidationMessageFor(m => m.CustomerName, "", new { @class = "badge badge-danger" })
+                </div>
+                @Html.LabelFor(m => m.CustomerEmailId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.CustomerEmailId, "", new { @class = "form-control", @placeholder = "Email" })
+                    @Html.ValidationMessageFor(m => m.CustomerEmailId, "", new { @class = "badge badge-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.CustomerPhone, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.CustomerPhone, new { @class = "form-control", @placeholder = "Phone" })
+                    @Html.ValidationMessageFor(m => m.CustomerPhone, "", new { @class = "badge badge-danger" })
+                </div>
+
+
+                @Html.LabelFor(m => m.CustomerAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.TextBoxFor(m => m.CustomerAddress, new { @class = "form-control", @placeholder = "Phone" })
+                    @Html.ValidationMessageFor(m => m.CustomerAddress, "", new { @class = "badge badge-danger" })
+                </div>
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.CustomerPssword, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.PasswordFor(m => m.CustomerPssword, new { @class = "form-control", @placeholder = "Confim Password" })
+                    @Html.ValidationMessageFor(m => m.CustomerPssword, "", new { @class = "badge badge-danger" })
+                </div>
+
+
+                @Html.LabelFor(m => m.ConfirmPassword, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-3">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confim Password" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "badge badge-danger" })
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div style="text-align:center">
+                    <input type="submit" name="Register" class="btn btn-success" value="Register" style="font-style:italic;font-size:20px" />
+                </div>
+            </div>
+            <div class="col-md-6" style="padding-left:350px;">
+                <a  href="@Url.Action("CustomerLogin", "Customer")" class="btn btn-info" style="font-size:18px">
+                    Login
+                    <span class="glyphicon glyphicon-registration-mark" aria-hidden="true"></span>
+                </a>
+            </div>
+
+        </div>
+
+    }
+    @section Scripts{
+        <script src="~/Scripts/jquery.validate.min.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    }
+         </div>
+</body>

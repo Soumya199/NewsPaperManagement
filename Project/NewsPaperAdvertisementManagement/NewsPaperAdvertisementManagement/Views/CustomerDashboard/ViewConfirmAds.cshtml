@@ -1,0 +1,25 @@
+﻿@model IEnumerable<NewsPaperAdvertisementManagement.Models.Advertisement>
+
+@{
+    ViewBag.Title = "ViewConfirmAds";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<h2>ViewConfirmAds</h2>
+@foreach(var item in Model){
+<div class="card" style="width:20cm;margin-left:200px">
+    <img class="card-img-top"src="@Url.Content(item.AdvertisementImage)">
+    <div class="card-body">
+        <div class="card-title">
+            <b>Title: @item.AdvertisementName</b>
+
+        </div>
+        <div class="card-text">
+            <p>@item.AdvertisementDescription</p>
+            <strong>
+             Price: @item.AdvertisementPrice     
+            </strong>
+        </div>
+    </div>
+</div>
+}

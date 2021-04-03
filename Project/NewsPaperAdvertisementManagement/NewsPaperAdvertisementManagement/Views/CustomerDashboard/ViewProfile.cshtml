@@ -1,0 +1,31 @@
+﻿@model NewsPaperAdvertisementManagement.Models.Customer
+
+@{
+    ViewBag.Title = "ViewProfile";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<h2>ViewProfile</h2>
+
+<div class="card card-primary card-outline" style="position:center">
+    <div class="card-body box-profile">
+        <div class="text-center">
+            <img class="profile-user-img img-fluid img-circle"
+                 src="../Image/SiteResource/Profile.jpg"
+                 alt="User profile picture">
+        </div>
+
+        <h3 class="profile-username text-center">@Session["CustomerName"].ToString()</h3>
+        <ul class="list-group list-group-unbordered mb-3">
+            <li class="list-group-item">
+                <b>Ads Request</b> <a class="float-right">@ViewBag.requestad</a>
+            </li>
+            <li class="list-group-item">
+                <b>Ads Approve</b> <a class="float-right">@ViewBag.approved</a>
+            </li>
+        </ul>
+
+        <a href="@Url.Action("EditProfile")" class="btn btn-primary btn-block"><b>Edit Profile</b></a>
+    </div>
+    <!-- /.card-body -->
+</div>

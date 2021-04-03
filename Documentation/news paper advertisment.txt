@@ -1,0 +1,4 @@
+ 
+News Paper Advertisement Management project
+News Paper or newspaper agencies need a software for advertisement display and management considering volume of the ad booking request they get.
+ 
